@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+@layer utilities {
+  .weights {
+    font-weight: 500;
+  }
+
+  .normal-font-size {
+    font-size: 18px;
+  }
+
+  .linear-gradient {
+    background: linear-gradient(hsl(249, 99%, 64%) to hsl(278, 94%, 30%));
+  }
+  .error {
+    color: hsl(0, 100%, 66%);
+  }
+}
