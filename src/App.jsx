@@ -1,8 +1,10 @@
+import { Form } from "./components/Form";
+
 function App() {
   return (
-    <div>
-      <p>Hi</p>
-    </div>
+    <>
+      <Form />
+    </>
   );
 }
 
