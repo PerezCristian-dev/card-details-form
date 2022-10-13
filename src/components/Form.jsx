@@ -1,18 +1,7 @@
 import { Formik } from "formik";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
-
-const validateErrors = (values) => {
-  const errors = {};
-
-  // nameCard;
-  if (!values.nameCard) {
-    errors.nameCard = "Required";
-  } else if (values.nameCard.length < 3) {
-    errors.nameCard = "Invalid Name Card";
-  }
-  return errors;
-};
+import { validateErrors } from "../helpers/validateErrors";
 
 export const Form = () => {
   const { changeCard } = useContext(AppContext);
@@ -37,9 +26,6 @@ export const Form = () => {
         onSubmit={(values) => {
           changeCard({ ...values });
         }}
-        algo={() => {
-          console.log("Algo");
-        }}
       >
         {({ handleSubmit, handleChange, handleBlur, errors, values }) => (
           <form
@@ -55,13 +41,14 @@ export const Form = () => {
             <input
               name="nameCard"
               type="text"
-              onBlur={handleBlur}
               value={values.nameCard}
               onChange={(event) => {
                 onChange(event, handleChange);
               }}
               placeholder="e.g. Jane Appleseed"
-              className="rounded-lg border border-light-grayish-violet p-2 my-2"
+              className={`rounded-lg border border-light-grayish-violet p-2 my-2 outline-none ${
+                errors.nameCard ? "border-red-500" : ""
+              }`}
             />
             <span className="error">{errors.nameCard}</span>
             <label
@@ -77,11 +64,16 @@ export const Form = () => {
                 onChange(event, handleChange);
               }}
               value={values.numberCard}
-              maxLength="16"
-              minLength="16"
+              maxLength="19"
+              minLength="19"
               placeholder="e.g. 1234 5678 9123 0000"
-              className="rounded-lg border border-light-grayish-violet p-2 my-2"
+              className={`rounded-lg border border-light-grayish-violet p-2 my-2  outline-none ${
+                errors.numberCard ? "border-red-500" : ""
+              }`}
             />
+
+            <span className="error">{errors.numberCard}</span>
+
             <div className="flex justify-between">
               <div className="mt-2">
                 <label
@@ -100,7 +92,9 @@ export const Form = () => {
                     value={values.monthCard}
                     maxLength="2"
                     placeholder="MM"
-                    className="rounded-lg border border-light-grayish-violet p-2 mr-2 my-2 w-20"
+                    className={`rounded-lg border border-light-grayish-violet p-2 mr-2 my-2 w-20 outline-none ${
+                      errors.monthCard ? "border-red-500" : ""
+                    }`}
                   />
                   <input
                     name="yearCard"
@@ -111,10 +105,16 @@ export const Form = () => {
                     value={values.yearCard}
                     placeholder="YY"
                     maxLength="2"
-                    className="rounded-lg border border-light-grayish-violet p-2 my-2 w-20"
+                    className={`rounded-lg border border-light-grayish-violet p-2 my-2 w-20 outline-none ${
+                      errors.yearCard ? "border-red-500" : ""
+                    }`}
                   />
                 </div>
+                <span className="error">
+                  {errors.yearCard || errors.monthCard}
+                </span>
               </div>
+
               <div className="flex flex-col mt-2">
                 <label
                   htmlFor="cvc"
@@ -132,8 +132,11 @@ export const Form = () => {
                   }}
                   value={values.cvc}
                   placeholder="e.g. 123"
-                  className="rounded-lg border border-light-grayish-violet p-2 my-2 w-48"
+                  className={`rounded-lg border border-light-grayish-violet p-2 my-2 w-48 outline-none ${
+                    errors.cvc ? "border-red-500" : ""
+                  }`}
                 />
+                <span className="error">{errors.cvc}</span>
               </div>
             </div>
             <button
