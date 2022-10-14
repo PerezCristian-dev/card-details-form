@@ -4,9 +4,9 @@ import bg_main from "../../public/bg-main-desktop.png";
 
 export const Banner = () => {
   return (
-    <div className="w-[45%] relative top-0 left-0">
+    <div className="lg:w-[45%] relative top-0 left-0">
       {/* banner BG */}
-      <div className="w-full h-screen">
+      <div className="h-60 lg:w-full lg:h-screen">
         <img src={bg_main} alt="bg banner" className="h-full w-full" />
       </div>
 

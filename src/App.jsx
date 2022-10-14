@@ -5,7 +5,7 @@ import { AppProvider } from "./context/AppProvider";
 function App() {
   return (
     <AppProvider>
-      <section className="flex items-center">
+      <section className="lg:flex lg:items-center lg:justify-center">
         <Banner />
         <Form />
       </section>

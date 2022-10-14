@@ -13,7 +13,7 @@ export const Form = () => {
   };
 
   return (
-    <section className="flex justify-center w-[55%] mx-32 ">
+    <section className="flex justify-center items-center lg:w-[55%] mt-2 md:mt-4 lg:mx-32">
       <Formik
         initialValues={{
           nameCard: "",
