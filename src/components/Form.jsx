@@ -1,4 +1,4 @@
-import { Formik } from "formik";
+import { ErrorMessage, Field, Formik } from "formik";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { validateErrors } from "../helpers/validateErrors";
@@ -13,7 +13,7 @@ export const Form = () => {
   };
 
   return (
-    <section className="flex justify-center items-center lg:w-[55%] mt-2 md:mt-4 lg:mx-32">
+    <section className="flex justify-center items-center lg:w-[55%] mt-4 md:mt-8 lg:mx-32">
       <Formik
         initialValues={{
           nameCard: "",
@@ -27,7 +27,14 @@ export const Form = () => {
           changeCard({ ...values });
         }}
       >
-        {({ handleSubmit, handleChange, handleBlur, errors, values }) => (
+        {({
+          handleSubmit,
+          handleChange,
+          handleBlur,
+          errors,
+          values,
+          touched,
+        }) => (
           <form
             onSubmit={handleSubmit}
             className="flex flex-col w-96 m-10 justify-self-end"
@@ -42,15 +49,20 @@ export const Form = () => {
               name="nameCard"
               type="text"
               value={values.nameCard}
+              onBlur={handleBlur}
               onChange={(event) => {
                 onChange(event, handleChange);
               }}
               placeholder="e.g. Jane Appleseed"
               className={`rounded-lg border border-light-grayish-violet p-2 my-2 outline-none ${
-                errors.nameCard ? "border-red-500" : ""
+                errors.nameCard && touched.nameCard ? "border-red-500" : ""
               }`}
             />
-            <span className="error">{errors.nameCard}</span>
+
+            {errors.nameCard && touched.nameCard ? (
+              <span className="error">{errors.nameCard}</span>
+            ) : null}
+
             <label
               htmlFor="numberCard"
               className="uppercase text-very-dark-violet mt-2"
@@ -60,6 +72,7 @@ export const Form = () => {
             <input
               name="numberCard"
               type="text"
+              onBlur={handleBlur}
               onChange={(event) => {
                 onChange(event, handleChange);
               }}
@@ -68,11 +81,13 @@ export const Form = () => {
               minLength="19"
               placeholder="e.g. 1234 5678 9123 0000"
               className={`rounded-lg border border-light-grayish-violet p-2 my-2  outline-none ${
-                errors.numberCard ? "border-red-500" : ""
+                errors.numberCard && touched.numberCard ? "border-red-500" : ""
               }`}
             />
 
-            <span className="error">{errors.numberCard}</span>
+            {errors.numberCard && touched.numberCard ? (
+              <span className="error">{errors.numberCard}</span>
+            ) : null}
 
             <div className="flex justify-between">
               <div className="mt-2">
@@ -86,6 +101,7 @@ export const Form = () => {
                   <input
                     name="monthCard"
                     type="text"
+                    onBlur={handleBlur}
                     onChange={(event) => {
                       onChange(event, handleChange);
                     }}
@@ -93,12 +109,15 @@ export const Form = () => {
                     maxLength="2"
                     placeholder="MM"
                     className={`rounded-lg border border-light-grayish-violet p-2 mr-2 my-2 w-20 outline-none ${
-                      errors.monthCard ? "border-red-500" : ""
+                      errors.monthCard && touched.monthCard
+                        ? "border-red-500"
+                        : ""
                     }`}
                   />
                   <input
                     name="yearCard"
                     type="text"
+                    onBlur={handleBlur}
                     onChange={(event) => {
                       onChange(event, handleChange);
                     }}
@@ -106,13 +125,21 @@ export const Form = () => {
                     placeholder="YY"
                     maxLength="2"
                     className={`rounded-lg border border-light-grayish-violet p-2 my-2 w-20 outline-none ${
-                      errors.yearCard ? "border-red-500" : ""
+                      errors.yearCard && touched.yearCard
+                        ? "border-red-500"
+                        : ""
                     }`}
                   />
                 </div>
-                <span className="error">
-                  {errors.yearCard || errors.monthCard}
-                </span>
+                <div className="flex flex-col">
+                  {errors.yearCard && touched.yearCard ? (
+                    <span className="error">{errors.yearCard}</span>
+                  ) : null}
+
+                  {errors.monthCard && touched.monthCard ? (
+                    <span className="error">{errors.monthCard}</span>
+                  ) : null}
+                </div>
               </div>
 
               <div className="flex flex-col mt-2">
@@ -127,16 +154,19 @@ export const Form = () => {
                   type="text"
                   maxLength="3"
                   minLength="3"
+                  onBlur={handleBlur}
                   onChange={(event) => {
                     onChange(event, handleChange);
                   }}
                   value={values.cvc}
                   placeholder="e.g. 123"
                   className={`rounded-lg border border-light-grayish-violet p-2 my-2 w-48 outline-none ${
-                    errors.cvc ? "border-red-500" : ""
+                    errors.cvc && touched.cvc ? "border-red-500" : ""
                   }`}
                 />
-                <span className="error">{errors.cvc}</span>
+                {errors.cvc && touched.cvc ? (
+                  <span className="error">{errors.cvc}</span>
+                ) : null}
               </div>
             </div>
             <button

@@ -18,7 +18,7 @@ export const validateErrors = (values) => {
 
   //monthCard ;
   if (!values.monthCard) {
-    errors.monthCard = "Can't be blank";
+    errors.monthCard = "Month can't be blank";
   } else if (
     values.monthCard.length === 2 &&
     !(values.monthCard * 1 >= 1 && values.monthCard * 1 <= 12)
@@ -30,7 +30,7 @@ export const validateErrors = (values) => {
 
   //yearCard ;
   if (!values.yearCard) {
-    errors.yearCard = "Can't be blank";
+    errors.yearCard = "Year can't be blank";
   } else if (
     values.yearCard.length === 2 &&
     parseInt(20 + values.yearCard) - new Date().getFullYear() < 0
@@ -43,6 +43,8 @@ export const validateErrors = (values) => {
   //cvc ;
   if (!values.cvc) {
     errors.cvc = "Can't be blank";
+  } else if (!/^[0-9]*$/g.test(values.cvc)) {
+    errors.cvc = "CVC not valid";
   } else if (values.cvc.length !== 3) {
     errors.cvc = "Max 3 characters";
   }
