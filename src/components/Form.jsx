@@ -77,8 +77,6 @@ export const Form = () => {
                 onChange(event, handleChange);
               }}
               value={values.numberCard}
-              maxLength="19"
-              minLength="19"
               placeholder="e.g. 1234 5678 9123 0000"
               className={`rounded-lg border border-light-grayish-violet p-2 my-2  outline-none ${
                 errors.numberCard && touched.numberCard ? "border-red-500" : ""

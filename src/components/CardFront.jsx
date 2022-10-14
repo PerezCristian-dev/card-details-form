@@ -15,7 +15,7 @@ export const CardFront = () => {
 
   return (
     <div
-      className="absolute top-[50%] left-[50%] translate-x-[-70%] translate-y-[-5%] 
+      className="absolute top-[50%] left-[50%] translate-x-[-60%] translate-y-[-5%] sm:translate-x-[-70%] sm:translate-y-[-5%] 
       lg:left-auto lg:transform-none lg:top-32 lg:-right-20 w-[300px] sm:w-[320px] md:w-[340px] lg:w-96"
     >
       <div className="absolute top-0 p-5 w-full h-full flex flex-col justify-between">

@@ -9,9 +9,10 @@ export const Banner = () => {
       <div className="h-60 lg:w-full lg:h-screen">
         <img src={bg_main} alt="bg banner" className="h-full w-full" />
       </div>
-
-      <CardBack />
-      <CardFront />
+      <div className="w-full h-full absolute top-0 flex justify-center items-center">
+        <CardBack />
+        <CardFront />
+      </div>
     </div>
   );
 };
