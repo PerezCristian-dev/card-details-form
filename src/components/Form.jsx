@@ -25,6 +25,8 @@ export const Form = () => {
         }}
         validate={validateErrors}
         onSubmit={(values) => {
+          //! falta enviar datos
+          console.log(values);
           setIsValidForm(true);
         }}
       >
