@@ -12,6 +12,7 @@ const initialValues = {
 
 export const AppProvider = ({ children }) => {
   const [formData, setFormData] = useState(initialValues);
+  const [isValidForm, setIsValidForm] = useState(false);
 
   const changeCard = (newState) => {
     const [inputName, inputValue] = Object.entries(newState)[0];
@@ -26,11 +27,17 @@ export const AppProvider = ({ children }) => {
       return;
     }
 
-    setFormData({ ...formData, [inputName]: inputValue || "Jane appleseed" });
+    setFormData({
+      formData,
+      ...formData,
+      [inputName]: inputValue || "Jane appleseed",
+    });
   };
 
   return (
-    <AppContext.Provider value={{ ...formData, changeCard }}>
+    <AppContext.Provider
+      value={{ ...formData, changeCard, isValidForm, setIsValidForm }}
+    >
       {children}
     </AppContext.Provider>
   );

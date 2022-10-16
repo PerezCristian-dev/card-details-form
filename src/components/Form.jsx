@@ -1,10 +1,11 @@
-import { ErrorMessage, Field, Formik } from "formik";
+import { Formik } from "formik";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { validateErrors } from "../helpers/validateErrors";
+import { Button } from "./Button";
 
 export const Form = () => {
-  const { changeCard } = useContext(AppContext);
+  const { changeCard, setIsValidForm } = useContext(AppContext);
 
   const onChange = (event, handleChange) => {
     const { target } = event;
@@ -24,7 +25,7 @@ export const Form = () => {
         }}
         validate={validateErrors}
         onSubmit={(values) => {
-          changeCard({ ...values });
+          setIsValidForm(true);
         }}
       >
         {({
@@ -167,12 +168,7 @@ export const Form = () => {
                 ) : null}
               </div>
             </div>
-            <button
-              type="submit"
-              className="text-white bg-very-dark-violet rounded-lg p-4 mt-6"
-            >
-              Confirm
-            </button>
+            <Button>Confirm</Button>
           </form>
         )}
       </Formik>

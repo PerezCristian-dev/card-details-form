@@ -1,15 +1,17 @@
+import { useContext } from "react";
 import { Banner } from "./components/Banner";
 import { Form } from "./components/Form";
-import { AppProvider } from "./context/AppProvider";
+import { SuccessForm } from "./components/SuccessForm";
+import { AppContext } from "./context/AppContext";
 
 function App() {
+  const { isValidForm } = useContext(AppContext);
+
   return (
-    <AppProvider>
-      <section className="lg:flex lg:items-center lg:justify-center">
-        <Banner />
-        <Form />
-      </section>
-    </AppProvider>
+    <section className="lg:flex lg:items-center lg:justify-center">
+      <Banner />
+      {isValidForm ? <SuccessForm /> : <Form />}
+    </section>
   );
 }
 

@@ -7,6 +7,7 @@ export const addZero = (setFormData, inputName, inputValue, amountZero) => {
           ? 16
           : inputValue.replace(/\s/g, "").length)
     );
+
   setFormData((formData) => ({
     ...formData,
     [inputName]: result,
